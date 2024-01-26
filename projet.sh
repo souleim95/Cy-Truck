@@ -12,6 +12,13 @@ dossier_images="images"
 executable_t="chemin/vers/executable_t"
 executable_s="chemin/vers/executable_s"
 
+# Vérification de l'existence des exécutables principaux
+if [ ! -f "$executable_t" ] || [ ! -f "$executable_s" ]; then
+    echo "Erreur: Les exécutables principaux ne sont pas présents. Assurez-vous de compiler le makefile correctement."
+    exit 1
+fi
+
+
 # Gestion de l'option d'aide (-h)
 for arg in "$@"; do
     if [ "$arg" = "-h" ]; then
