@@ -22,7 +22,7 @@ fi
 # Gestion de l'option d'aide (-h)
 for arg in "$@"; do
     if [ "$arg" = "-h" ]; then
-        echo " => Veuillez taper dans le terminal la ligne suivante "./projet.sh data/data.csv" suivi du chemin vers lequel se trouve le fichier de données."
+        echo " => Veuillez taper dans le terminal la ligne suivante "./projet.sh data.csv" suivi du chemin vers lequel se trouve le fichier de données."
         echo "Options de traitement :"
         echo "L'option "-d1" qui vous permet d'afficher la liste des 10 premiers conducteurs avec le plus grand nombre de trajets."
         echo "L'option "-d2" qui vous permet d'afficher la liste des 10 premiers conducteurs avec la plus grande distance parcourue."
