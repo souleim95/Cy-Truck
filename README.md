@@ -26,25 +26,25 @@ Pour exécuter le script, ouvrez un terminal et assurez-vous que votre fichier �
 ### Option du script :
   Le script Shell offre plusieurs options pour traiter et analyser les données d'un fichiers CSV de trajets de conducteurs. Voici un résumé des options disponibles :
 
-#### [D1] : Conducteurs avec le Plus de Trajets
+#### TRAITEMENT [D1] : conducteurs avec le plus de trajets :
 - Option : `-d1`
 
-- Temps d'exécution ciblé : Environ 8 secondes.
+- Temps d'exécution  : Environ 8 secondes.
 
-#### [D2] : Conducteurs et la Plus Grande Distance
+####  TRAITEMENT [D2] : conducteurs et la plus grande distance: 
 - Option : `-d2`
 
-- Temps d'exécution ciblé : Environ 7 secondes.
+- Temps d'exécution  : Environ 7 secondes.
 
-#### [L] : Les 10 Trajets les Plus Longs
+#### TRAITEMENT [L] : les 10 trajets les plus longs : 
 - Option : `-l`
 
-- Temps d'exécution ciblé : Environ 8 secondes.
+- Temps d'exécution  : Environ 8 secondes.
 
-#### [T] : Les 10 Villes les Plus Traversées
+#### TRAITEMENT [T] : les 10 villes les plus traversées :
 - Option : `-t`
   
-- Temps d'exécution ciblé : Environ 20 secondes.
+- Temps d'exécution : Environ 20 secondes.
 
-#### [S] : Statistiques sur les Étapes
+#### Traitement [S] : statistiques sur les étapes : 
 - Option : `-s`
