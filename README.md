@@ -42,6 +42,8 @@ Pour exécuter le script, ouvrez un terminal et assurez-vous que votre fichier �
 
 #### [T] : Les 10 Villes les Plus Traversées
 - Option : `-t`
+  
+- Temps d'exécution ciblé : Environ 20 secondes.
 
 #### [S] : Statistiques sur les Étapes
 - Option : `-s`
