@@ -96,15 +96,13 @@ make -s
 
 # Exécuter le script et rediriger la sortie vers le fichier dans le dossier temp
 ./exec > "../$dossier_temp/resultat_t.txt"
-
+make -s clean
+rm -r "result.csv"
 # Revenir au dossier parent de progc si nécessaire
 cd ..
 
 # Afficher le contenu du fichier resultat_t.txt
 cat "$dossier_temp/resultat_t.txt"
-
-
-
 
 
     gnuplot "graph3.gp"
