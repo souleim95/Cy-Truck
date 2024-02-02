@@ -8,10 +8,6 @@ Ce script shell a été conçu pour effectuer des traitements spécifiques sur d
 
 Vous devez avoir environnement Bash disposant des outils nécessaires tels que `awk`, `gcc` pour compiler, `gnuplot` pour la génération des graphiques.
 
-- Pour gcc: https://dev.to/gamegods3/how-to-install-gcc-in-windows-10-the-easier-way-422j 
-- Pour gnuplot: https://doc.ubuntu-fr.org/gnuplot
-- Pour awk: présente par defaut sous Unix
-
 ### Exécution du script :
 
 Pour exécuter le script, ouvrez un terminal et assurez-vous que votre fichier à analyser est placé dans le dossier **`data`** situé dans le répertoire du code. Puis exécutez la commande suivante :
