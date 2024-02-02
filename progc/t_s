@@ -1,0 +1,208 @@
+/*
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+
+typedef struct Avl{
+struct Avl* fd;
+struct Avl* fg;
+int eq;
+float moy;
+float min;
+float max;
+float diff;
+int route_id;
+int etape;
+int total;
+}Avl;
+
+typedef struct {
+    float diff;
+    float moy;
+} Resultat;
+
+Avl* Create_Avl(int id, float distance){
+  Avl* NewA=malloc(sizeof(Avl));
+  if(NewA==NULL){
+    exit (21);
+  }
+  NewA->route_id=id;
+  NewA->min=distance;
+  NewA->max=distance;
+  NewA->moy=0;
+  NewA->etape=1;
+  NewA->total=distance;
+  NewA->eq=0;
+  NewA->fd=NULL;
+  NewA->fg=NULL;
+  NewA->diff=0;
+  return NewA;
+}
+
+
+int max(int a, int b) {
+  if (a >= b) {
+    return a;
+  }
+  return b;
+}
+
+int min(int a, int b) {
+  if (a >= b) {
+    return b;
+  }
+  return a;
+}
+
+int min2(int a, int b, int c) { return min(min(a, b), c); }
+
+int max2(int a, int b, int c) { return max(max(a, b), c); }
+
+
+Avl *rotationG(Avl *a) {
+  int eq_pivot;
+  int eq_a;
+  Avl *pivot;
+  pivot = a->fd;
+  a->fd = pivot->fg;
+  pivot->fg = a;
+  eq_a = a->eq;
+  eq_pivot = pivot->eq;
+  a->eq = eq_a - max(eq_pivot, 0) - 1;
+  pivot->eq = min2(eq_a - 2, eq_a + eq_pivot - 2, eq_pivot - 1);
+  a = pivot;
+  return a;
+}
+
+Avl *rotationD(Avl *a) {
+  int eq_pivot;
+  int eq_a;
+  Avl *pivot;
+  pivot = a->fg;
+  a->fg = pivot->fd;
+  pivot->fd = a;
+  eq_a = a->eq;
+  eq_pivot = pivot->eq;
+  a->eq = eq_a - min(eq_pivot, 0) + 1;
+  pivot->eq = max2(eq_a + 2, eq_a + eq_pivot + 2, eq_pivot + 1);
+  a = pivot;
+  return a;
+}
+
+Avl *DoubleRG(Avl *a) {
+  a->fd = rotationD(a->fd);
+  return rotationG(a);
+}
+
+Avl *DoubleRD(Avl *a) {
+  a->fg = rotationG(a->fg);
+  return rotationD(a);
+}
+
+Avl *equilibreAVL(Avl *a) {
+  if (a->eq >= 2) {
+    if (a->fd->eq >= 0) {
+      return rotationG(a);
+    } else {
+      return DoubleRG(a);
+    }
+  } else if (a->eq <= -2) {
+    if (a->fg->eq <= 0) {
+      return rotationD(a);
+    } else {
+      return DoubleRD(a);
+    }
+  }
+  return a;
+}
+
+
+
+Avl* insertionAVL(Avl* a, int id,float distance,int *h) {
+    if (a == NULL) {
+        *h = 1;
+        return Create_Avl(id,distance);
+    } 
+    
+    if(a->route_id==id){
+      a->max=max(a->max,distance);
+      a->min=min(a->min,distance);
+      a->total+=distance;
+      a->etape+=1;
+      a->diff=a->max-a->min;
+      *h=0;
+      return a;
+    }
+     if (a->route_id > id) {
+        a->fg = insertionAVL(a->fg, id, distance, h);
+        *h = -*h;
+    } else if (a->route_id < id) {
+        a->fd = insertionAVL(a->fd, id,distance, h);
+    } else{
+       *h=0;
+        return a;
+    }
+
+    if (*h != 0) {
+        a->eq = a->eq + *h;
+        a=equilibreAVL(a);
+
+        if (a->eq == 0) {
+            *h = 0;
+        } else {
+            *h = 1;
+        }
+    }
+
+    return a;
+}
+
+void getTop50Differences(Avl* racine, Resultat* tableauResultats, int* index) {
+    if (racine != NULL && *index < 50) {
+        getTop50Differences(racine->fd, tableauResultats, index);  // Visiter le sous-arbre droit
+
+        // Traiter le nœud
+        tableauResultats[*index].diff = racine->diff;
+        tableauResultats[*index].moy = racine->moy;
+        (*index)++;
+
+        getTop50Differences(racine->fg, tableauResultats, index);  // Visiter le sous-arbre gauche
+    }
+}
+
+int main() {
+    FILE* fichier = fopen("result2.csv", "r");
+
+    if (fichier == NULL) {
+        perror("Erreur lors de l'ouverture du fichier");
+        exit(EXIT_FAILURE);
+    }
+
+    Avl* racine = NULL;
+    int entier1;
+    float distance;
+
+    int* h = malloc(sizeof(int));
+
+    // Lire chaque ligne du fichier
+    while (fscanf(fichier, "%d;%f", &entier1, &distance) == 2) {
+        racine = insertionAVL(racine, entier1, distance, h);
+    }
+
+   Resultat tableauResultats[50];
+    int index = 0;
+    getTop50Differences(racine, tableauResultats, &index);
+
+    // Afficher les 50 plus grandes valeurs
+    printf("Les 50 plus grandes valeurs en fonction de max-min :\n");
+    for (int i = 0; i < index; i++) {
+        printf("Différence : %.2f, Moyenne : %.2f\n", tableauResultats[i].diff, tableauResultats[i].moy);
+    }
+
+    return 0;
+}
+
+/*
+
