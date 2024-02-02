@@ -15,10 +15,13 @@ executable_s="chemin/vers/executable_s"
 # Gestion de l'option d'aide (-h)
 for arg in "$@"; do
     if [ "$arg" = "-h" ]; then
-        echo "Usage: $0 chemin_du_fichier_csv traitement1 [traitement2 ...]"
+        echo "Veuillez taper dans le terminal la ligne suivante "./projet.sh data.csv" suivi d'une option"
         echo "Options de traitement :"
-        echo "- traitement1 : Description du traitement1"
-        echo "- traitement2 : Description du traitement2"
+        echo "L'option "-d1" qui vous permet d'afficher la liste des 10 premiers conducteurs avec le plus grand nombre de trajets."
+        echo "L'option "-d2" qui vous permet d'afficher la liste des 10 premiers conducteurs avec la plus grande distance parcourue."
+        echo "L'option "-l" qui vous permet d'afficher les 10 trajets les plus longs."
+        echo "L'option "-t" qui vous permet d'afficher les 10 villes les plus traversées."
+        echo "L'option "-s" qui vous permet d'afficher les statistiques sur les étapes."
         exit 0
     fi
 done
