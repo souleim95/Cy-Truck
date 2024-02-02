@@ -20,6 +20,7 @@ Pour exécuter le script, ouvrez un terminal et assurez-vous que votre fichier �
 ```bash
 ./projet.sh -h # Montre l'aide
 ./projet.sh data.csv -d1 # Execute les traitements d1
+./projet.sh data.csv -d2 -l .. # Execute plusieur traitement en même temps
 ```
 
 ### Option du script :
